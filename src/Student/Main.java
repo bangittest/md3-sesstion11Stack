@@ -1,30 +1,42 @@
 package Student;
-
+import Student.impl.*;
 import config.Config;
-
-import java.util.ArrayList;
-
-import static java.lang.CharSequence.compare;
-
+import java.util.Stack;
 public class Main {
+    static Stack<Student>students=new Stack<Student>();
     public static void main(String[] args) {
-        ArrayList<Student> students = new ArrayList<>();
-        System.out.println("Nhập số lượng sinh viên cần thêm : ");
-        int n = Config.scanner().nextInt();
-        for (int i = 0; i < n; i++) {
-            Student student = new Student();
-            student.inputData();
-            students.add(student);
-        }
-        System.out.println("Danh sách sinh viên : ");
-        for (Student student : students) {
-            student.displayData();
-        }
-        students.sort((student1, student2) -> compare(student1.getName(), student2.getName()));
-        System.out.println("Sắp xếp apha b thành công ");
-        for (Student student : students) {
-            student.displayData();
-        }
+        int choice;
+        do {
+            System.out.println("1 them");
+            System.out.println("2 hien thi danh sach");
+            System.out.println("3 sua");
+            System.out.println("4 xoa");
+            System.out.println("5 sap xep");
+            System.out.println("6 tim kiem theo ten");
+            choice = Config.scanner().nextInt();
+            switch (choice) {
+                case 1:
+                    AddStudent.addStudent(students);
+                    break;
+                case 2:
+                    HienThi.hienThi(students);
+                    break;
+                case 3:
+                    UpdateStudent.updateStudent(students);
+                    break;
+                case 4:
+                    DeleteStudent.deleteStudent(students);
+                    break;
+                case 5:
+                    SortStudent.sortStudent(students);
+                    break;
+                case 6:
+                    SeachStudent.seachStudent(students);
+                    break;
+                default:
+                    System.out.println("nhap k dung");
+            }
+        } while (choice!=7);
     }
 }
 
